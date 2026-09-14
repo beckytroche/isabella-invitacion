@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Isabella — Sweet One</title>
+
+<style>
+
+/* =========================================================
+   ESTRUCTURA GENERAL
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: Georgia, serif;
+    background: #fff9f5;
+    color: #5b4650;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.pagina {
+    min-height: 100vh;
+    width: 100%;
+}
+
+#invitacion {
+    display: none;
+    width: 100vw;
+    min-height: 100vh;
+}
+
+
+/* =========================================================
+   SOBRE
+   ========================================================= */
+
+#sobre {
+    width: 100vw;
+    height: 100vh;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    background-image: none;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: block;
+    position: absolute;
+    cursor: pointer;
+}
+
+#sobre img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.sobre {
+    width: 100vw;
+    height: 100vh;
+    background-image: url("sobre.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    cursor: pointer;
+}
+
+.sobre::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-left: 140px solid transparent;
+    border-right: 140px solid transparent;
+    border-top: 105px solid #edb8c0;
+}
+
+.sello {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    background: #d8ad63;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 28px;
+    z-index: 3;
+}
+
+.texto-sobre {
+    margin-top: 35px;
+    font-size: 22px;
+}
+
+#sobre .sobre {
+    width: 100%;
+    height: 100vh;
+    background: transparent;
+    box-shadow: none;
+    border-radius: 0;
+}
+
+#sobre .sobre::before {
+    display: none;
+}
+
+#sobre .sello,
+#sobre .texto-sobre,
+#sobre .sobre::before {
+    display: none !important;
+}
+
+
+/* =========================================================
+   ELEMENTOS ANTIGUOS — SE CONSERVAN
+   No interfieren con la versión actual.
+   ========================================================= */
+
+.contenido {
+    min-height: 100vh;
+    padding: 60px 25px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 48px;
+    margin: 10px 0;
+}
+
+.subtitulo {
+    font-size: 27px;
+    font-style: italic;
+}
+
+.fecha {
+    font-size: 20px;
+    margin: 20px 0;
+}
+
+.cuenta {
+    margin: 45px auto;
+    padding: 25px;
+    max-width: 600px;
+    background: rgba(255,255,255,0.7);
+    border-radius: 25px;
+}
+
+.cuenta h2 {
+    margin-top: 0;
+}
+
+#contador {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.info {
+    max-width: 600px;
+    margin: 50px auto;
+    line-height: 1.8;
+    font-size: 19px;
+}
+
+.botones {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    max-width: 350px;
+    margin: 40px auto;
+}
+
+.boton {
+    display: block;
+    padding: 17px 20px;
+    border-radius: 40px;
+    text-decoration: none;
+    background: #d8ad63;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    border: none;
+}
+
+.final {
+    padding: 80px 20px;
+    font-size: 20px;
+}
+
+
+/* =========================================================
+   DISEÑO PRINCIPAL DE LA INVITACIÓN
+   ========================================================= */
+
+.invitacion-diseño {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 756 / 5291;
+    background-image: url("invitacion.png");
+    background-size: 100% auto;
+    background-position: top center;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+
+/* =========================================================
+   CONTADOR
+   ========================================================= */
+
+.contador-interactivo {
+    position: absolute;
+    top: 47%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    /*
+       Mantiene el ancho relativo actual.
+       72% del diseño.
+    */
+    width: 72%;
+
+    display: flex;
+    justify-content: center;
+
+    /*
+       La separación ahora también escala.
+       12px a la escala de referencia.
+    */
+    gap: clamp(2px, 1.587vw, 12px);
+
+    z-index: 10;
+}
+
+.tarjeta-tiempo {
+    position: relative;
+
+    /*
+       Conservamos el 30% actual.
+    */
+    width: 30%;
+
+    /*
+       La altura se adapta continuamente.
+       180px es el máximo de referencia.
+       En pantallas pequeñas baja proporcionalmente.
+    */
+    height: clamp(50px, 13vw, 180px);
+
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.12);
+
+    text-align: center;
+    z-index: 1;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    /*
+       El padding también acompaña la escala.
+    */
+    padding: clamp(4px, 1.587vw, 12px)
+             clamp(1px, 0.529vw, 4px)
+             clamp(3px, 1.058vw, 8px);
+}
+
+
+/* =========================================================
+   ARGOLLAS
+   ========================================================= */
+
+.argolla {
+    position: absolute;
+
+    /*
+       Antes era -9px fijo.
+       Ahora acompaña el tamaño de la pantalla.
+    */
+    top: clamp(-9px, -1.19vw, -4px);
+
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: clamp(10px, 2.38vw, 18px);
+    height: clamp(10px, 2.38vw, 18px);
+
+    border: clamp(2px, 0.397vw, 3px) solid #d8ad63;
+    border-radius: 50%;
+    background: white;
+    z-index: 5;
+}
+
+
+/* =========================================================
+   NÚMEROS
+   ========================================================= */
+
+.numero {
+    font-family: Georgia, serif;
+
+    /*
+       110px es la escala máxima original.
+       En teléfonos se reduce de manera continua.
+    */
+    font-size: clamp(30px, 9vw, 110px);
+
+    font-weight: bold;
+
+    background: linear-gradient(
+        90deg,
+        #a97932,
+        #e7ca7b,
+        #c99a4e,
+        #eedb98,
+        #b27a2f
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+
+    line-height: 1;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /*
+       No dejamos que el flex vuelva a deformar
+       la posición vertical del número.
+    */
+    flex: none;
+}
+
+
+/* =========================================================
+   ETIQUETAS
+   ========================================================= */
+
+.etiqueta {
+    /*
+       25px es la referencia original.
+    */
+    font-size: clamp(8px, 2vw, 25px);
+
+    font-weight: bold;
+    letter-spacing: 0.8px;
+    color: #8c7078;
+
+    margin-top: clamp(1px, 0.265vw, 2px);
+text-align: center;
+}
+
+
+/* =========================================================
+   BOTÓN UBICACIÓN
+   ========================================================= */
+
+.boton-ubicacion {
+    position: absolute;
+
+    /*
+       MISMA posición que ya aprobaste.
+    */
+    top: 70%;
+    left: 75%;
+
+    /*
+       Conservamos el scale .75.
+    */
+    transform: translateX(-50%) scale(0.75);
+
+    text-decoration: none;
+    font-family: Georgia, serif;
+
+    /*
+       Conserva la proporción actual en móvil,
+       pero no crece indefinidamente en pantallas grandes.
+    */
+    font-size: clamp(11px, 3.7vw, 25px);
+
+    font-weight: bold;
+    color: #b58b4a;
+
+    background: rgba(255, 255, 255, 0.88);
+
+    border: clamp(1px, 0.26vw, 2px) solid #d8ad63;
+
+    border-radius: clamp(15px, 4vw, 30px);
+
+    padding:
+        clamp(4px, 1.2vw, 11px)
+        clamp(12px, 4vw, 38px);
+
+    z-index: 10;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+    white-space: nowrap;
+}
+
+.boton-ubicacion span {
+    background: linear-gradient(
+        90deg,
+        #a97932,
+        #e7ca7b,
+        #c99a4e,
+        #eedb98,
+        #b27a2f
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.boton-ubicacion::before {
+    content: "◆";
+    margin-right: clamp(5px, 1.59vw, 12px);
+    font-size: clamp(8px, 1.72vw, 13px);
+    color: #d8ad63;
+}
+
+.boton-ubicacion::after {
+    content: "◆";
+    margin-left: clamp(5px, 1.59vw, 12px);
+    font-size: clamp(8px, 1.72vw, 13px);
+    color: #d8ad63;
+}
+
+
+/* =========================================================
+   BOTÓN CONFIRMAR
+   ========================================================= */
+
+.boton-confirmar {
+    position: absolute;
+
+    /*
+       MISMA posición que ya aprobaste.
+    */
+    top: 81.9%;
+    left: 52%;
+
+    /*
+       Conservamos el scale .75.
+    */
+    transform: translateX(-50%) scale(0.75);
+
+    text-decoration: none;
+    font-family: Georgia, serif;
+
+    /*
+       Conserva su tamaño relativo distinto
+       al botón de ubicación.
+    */
+    font-size: clamp(11px, 4vw, 25px);
+
+    font-weight: bold;
+    color: #b58b4a;
+
+    background: rgba(255, 255, 255, 0.88);
+
+    border: clamp(1px, 0.265vw, 2px) solid #d8ad63;
+
+    border-radius: clamp(15px, 3.97vw, 30px);
+
+    /*
+       Escala el padding sin eliminar
+       la diferencia que ya tenía respecto
+       al botón de ubicación.
+    */
+    padding:
+        clamp(5px, 1.19vw, 9px)
+        clamp(14px, 3.31vw, 25px);
+
+    z-index: 10;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+    white-space: nowrap;
+}
+
+.boton-confirmar span {
+    background: linear-gradient(
+        90deg,
+        #a97932,
+        #e7ca7b,
+        #c99a4e,
+        #eedb98,
+        #b27a2f
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.boton-confirmar::before {
+    content: "◆";
+    margin-right: clamp(5px, 1.59vw, 12px);
+    font-size: clamp(8px, 1.72vw, 13px);
+    color: #d8ad63;
+}
+
+.boton-confirmar::after {
+    content: "◆";
+    margin-left: clamp(5px, 1.59vw, 12px);
+    font-size: clamp(8px, 1.72vw, 13px);
+    color: #d8ad63;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- =====================================================
+     PÁGINA 1: SOBRE
+     ===================================================== -->
+
+<section id="sobre" class="pagina" onclick="abrirInvitacion()">
+    <img src="sobre.png" alt="">
+</section>
+
+
+<!-- =====================================================
+     PÁGINA 2: INVITACIÓN
+     ===================================================== -->
+
+<section id="invitacion">
+
+    <div class="invitacion-diseño">
+
+        <!-- CONTADOR -->
+
+        <div class="contador-interactivo">
+
+            <div class="tarjeta-tiempo">
+                <div class="argolla"></div>
+                <div class="numero" id="dias">00</div>
+                <div class="etiqueta">DÍAS</div>
+            </div>
+
+            <div class="tarjeta-tiempo">
+                <div class="argolla"></div>
+                <div class="numero" id="horas">00</div>
+                <div class="etiqueta">HORAS</div>
+            </div>
+
+            <div class="tarjeta-tiempo">
+                <div class="argolla"></div>
+                <div class="numero" id="minutos">00</div>
+                <div class="etiqueta">MIN</div>
+            </div>
+
+        </div>
+
+
+        <!-- UBICACIÓN -->
+
+        <a
+            class="boton-ubicacion"
+            href="https://maps.app.goo.gl/6BCZ4xy9FUK6gmr86?g_st=ic"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            <span>Cómo llegar</span>
+        </a>
+
+
+        <!-- CONFIRMAR ASISTENCIA -->
+
+        <a
+            class="boton-confirmar"
+            href="https://wa.me/595961454647?text=Hola%21%20%F0%9F%92%95%20Quiero%20confirmar%20mi%20asistencia%20al%20primer%20cumplea%C3%B1os%20de%20Isabella.%20%F0%9F%8E%80%F0%9F%8D%AD"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            <span>Confirmar asistencia</span>
+        </a>
+
+    </div>
+
+</section>
+
+
+<script>
+
+/* =========================================================
+   APERTURA DE LA INVITACIÓN
+   ========================================================= */
+
+function abrirInvitacion() {
+
+    document.getElementById("sobre").style.visibility = "hidden";
+
+    setTimeout(function() {
+        document.getElementById("invitacion").style.display = "block";
+    }, 100);
+}
+
+
+/* =========================================================
+   CUENTA REGRESIVA
+   ========================================================= */
+
+/*
+   Fecha escrita de forma numérica para evitar
+   depender del formato de idioma del navegador.
+*/
+
+const fechaCumple = new Date(2026, 9, 18, 17, 0, 0).getTime();
+
+
+function actualizarContador() {
+
+    const ahora = new Date().getTime();
+    const diferencia = fechaCumple - ahora;
+
+
+    if (diferencia <= 0) {
+
+        document.getElementById("dias").textContent = "00";
+        document.getElementById("horas").textContent = "00";
+        document.getElementById("minutos").textContent = "00";
+
+        return;
+    }
+
+
+    const dias = Math.floor(
+        diferencia / (1000 * 60 * 60 * 24)
+    );
+
+
+    const horas = Math.floor(
+        (diferencia % (1000 * 60 * 60 * 24)) /
+        (1000 * 60 * 60)
+    );
+
+
+    const minutos = Math.floor(
+        (diferencia % (1000 * 60 * 60)) /
+        (1000 * 60)
+    );
+
+
+    document.getElementById("dias").textContent =
+        String(dias).padStart(2, "0");
+
+
+    document.getElementById("horas").textContent =
+        String(horas).padStart(2, "0");
+
+
+    document.getElementById("minutos").textContent =
+        String(minutos).padStart(2, "0");
+}
+
+
+actualizarContador();
+
+setInterval(actualizarContador, 1000);
+
+</script>
+
+</body>
+</html>
