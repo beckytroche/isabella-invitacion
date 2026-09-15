@@ -227,7 +227,36 @@ h1 {
 /* =========================================================
    CONTADOR
    ========================================================= */
+.faltan {
+    position: absolute;
+    top: 44%;
+    left: 50%;
+    transform: translateX(-50%);
 
+    font-family: Georgia, serif;
+    font-size: clamp(14px, 4vw, 28px);
+    font-weight: bold;
+
+    background: linear-gradient(
+        90deg,
+        #a97932,
+        #e7ca7b,
+        #c99a4e,
+        #eedb98,
+        #b27a2f
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+
+    white-space: nowrap;
+    z-index: 10;
+
+    text-shadow:
+        0 0 5px rgba(216, 173, 99, 0.35),
+        0 0 10px rgba(216, 173, 99, 0.2);
+}
 .contador-interactivo {
     position: absolute;
     top: 47%;
@@ -552,7 +581,8 @@ text-align: center;
     <div class="invitacion-diseño">
 
         <!-- CONTADOR -->
-
+       
+<div class="faltan">Faltan...</div>
         <div class="contador-interactivo">
 
             <div class="tarjeta-tiempo">
@@ -572,7 +602,12 @@ text-align: center;
                 <div class="numero" id="minutos">00</div>
                 <div class="etiqueta">MIN</div>
             </div>
-
+           
+<div class="tarjeta-tiempo">
+    <div class="argolla"></div>
+    <div class="numero" id="segundos">00</div>
+    <div class="etiqueta">SEG</div>
+</div>
         </div>
 
 
@@ -663,7 +698,11 @@ function actualizarContador() {
         (diferencia % (1000 * 60 * 60)) /
         (1000 * 60)
     );
-
+   
+const segundos = Math.floor(
+    (diferencia % (1000 * 60)) /
+    1000
+);
 
     document.getElementById("dias").textContent =
         String(dias).padStart(2, "0");
@@ -675,6 +714,9 @@ function actualizarContador() {
 
     document.getElementById("minutos").textContent =
         String(minutos).padStart(2, "0");
+   
+   document.getElementById("segundos").textContent =
+    String(segundos).padStart(2, "0");
 }
 
 
