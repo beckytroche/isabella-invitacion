@@ -236,15 +236,7 @@ h1 {
     font-family: Georgia, serif;
     font-size: clamp(17px, 4.8vw, 34px);
     font-weight: bold;
-
     color: #b58b4a;
-    background: rgba(255, 255, 255, 0.88);
-
-    border: clamp(1px, 0.26vw, 2px) solid #d8ad63;
-    border-radius: 999px;
-
-    padding: clamp(4px, 0.9vw, 8px)
-             clamp(20px, 5vw, 38px);
 
     white-space: nowrap;
     z-index: 10;
@@ -252,20 +244,14 @@ h1 {
 
 .faltan::before {
     content: "◆";
-    position: absolute;
-    left: clamp(7px, 2vw, 15px);
-    top: 50%;
-    transform: translateY(-50%);
+    margin-right: clamp(7px, 2vw, 15px);
     color: #d8ad63;
     font-size: clamp(8px, 1.7vw, 13px);
 }
 
 .faltan::after {
     content: "◆";
-    position: absolute;
-    right: clamp(7px, 2vw, 15px);
-    top: 50%;
-    transform: translateY(-50%);
+    margin-left: clamp(7px, 2vw, 15px);
     color: #d8ad63;
     font-size: clamp(8px, 1.7vw, 13px);
 }
@@ -594,7 +580,7 @@ text-align: center;
 
         <!-- CONTADOR -->
        
-<div class="faltan">Faltan...</div>
+<div class="faltan">Ya casi...</div>
         <div class="contador-interactivo">
 
             <div class="tarjeta-tiempo">
