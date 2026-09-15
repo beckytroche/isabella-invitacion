@@ -229,33 +229,45 @@ h1 {
    ========================================================= */
 .faltan {
     position: absolute;
-    top: 44%;
+    top: 45.3%;
     left: 50%;
     transform: translateX(-50%);
 
     font-family: Georgia, serif;
-    font-size: clamp(14px, 4vw, 28px);
+    font-size: clamp(17px, 4.8vw, 34px);
     font-weight: bold;
 
-    background: linear-gradient(
-        90deg,
-        #a97932,
-        #e7ca7b,
-        #c99a4e,
-        #eedb98,
-        #b27a2f
-    );
+    color: #b58b4a;
+    background: rgba(255, 255, 255, 0.88);
 
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    border: clamp(1px, 0.26vw, 2px) solid #d8ad63;
+    border-radius: 999px;
+
+    padding: clamp(4px, 0.9vw, 8px)
+             clamp(20px, 5vw, 38px);
 
     white-space: nowrap;
     z-index: 10;
+}
 
-    text-shadow:
-        0 0 5px rgba(216, 173, 99, 0.35),
-        0 0 10px rgba(216, 173, 99, 0.2);
+.faltan::before {
+    content: "◆";
+    position: absolute;
+    left: clamp(7px, 2vw, 15px);
+    top: 50%;
+    transform: translateY(-50%);
+    color: #d8ad63;
+    font-size: clamp(8px, 1.7vw, 13px);
+}
+
+.faltan::after {
+    content: "◆";
+    position: absolute;
+    right: clamp(7px, 2vw, 15px);
+    top: 50%;
+    transform: translateY(-50%);
+    color: #d8ad63;
+    font-size: clamp(8px, 1.7vw, 13px);
 }
 .contador-interactivo {
     position: absolute;
